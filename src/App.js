@@ -18,9 +18,9 @@ function App() {
 
   return (
     <div className='App'>
-      <h1 style={{fontSize:'60px', letterSpacing:'3rem', margin:'20px'}}>Tic Tac Toe</h1>
+      <h1 style={{fontSize:'60px', letterSpacing:'3rem', margin:'20px', color:'Darkblue'}}>Tic Tac Toe</h1>
       {/* title */}
-      <h2>{winning ? `${winning} WIN!` : (xIsNext ? 'X turn' : 'O turn')}</h2>
+      <h2 style={xIsNext ? {color:'green'} : {color:'blue'}}>{winning ? `${winning} WIN!` : (xIsNext ? 'X turn' : 'O turn')}</h2>
       <Board winning={winning} Sqaures={squares} onClick={handleSubmit} />
       <hr />
 
