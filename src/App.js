@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import react, {useState} from 'react'
+import Board from './components/Board';
+import {GetWinningTeam} from './components/helper';
 
 function App() {
+  const [squares, setSquares] = useState(Array(9).fill(null))
+  const [xIsNext, setXIsNext] = useState(true)
+  const winning = GetWinningTeam(squares)
+  
+  const handleSubmit = (i)=>{
+    if(winning || squares[i]) return;
+    squares[i] = xIsNext ? 'X' : 'O'
+    const newSqaures = [...squares]
+    setSquares(newSqaures)
+    setXIsNext(!xIsNext)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1 style={{fontSize:'60px', letterSpacing:'3rem', margin:'20px'}}>Tic Tac Toe</h1>
+      {/* title */}
+      <h2>{winning ? `${winning} WIN!` : (xIsNext ? 'X turn' : 'O turn')}</h2>
+      <Board winning={winning} Sqaures={squares} onClick={handleSubmit} />
+      <hr />
+
     </div>
   );
 }
